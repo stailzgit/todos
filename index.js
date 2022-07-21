@@ -1,13 +1,7 @@
-// const { ApolloServer, gql } = require('apollo-server');
-// const uuid = require('uuid')
 import express from "express";
-
 import { ApolloServer, gql } from "apollo-server";
-import { v4 } from "uuid";
-import mongoose from "mongoose";
 import { resolvers } from "./src/data/resolvers.js";
 import { typeDefs } from "./src/data/schema.js";
-import { PORT } from "./src/config/config.js";
 
 // let todos = [
 //   {
@@ -58,67 +52,6 @@ import { PORT } from "./src/config/config.js";
 //   return todo;
 // };
 
-// const server = new ApolloServer({
-//   typeDefs,
-//   resolvers,
-//   csrfPrevention: true,
-//   cache: "bounded",
-// });
-
-// // const server = new ApolloServer({
-// //   typeDefs,
-// //   resolvers,
-// //   csrfPrevention: true,
-// //   cache: 'bounded'
-// // })
-
-// const app = express();
-// await server.start();
-
-// server.applyMiddleware({ app, path: "/graphql" });
-
-// app.get("/", (req, res) => {
-//   console.log("Apollo GraphQL Express server is ready");
-// });
-
-// server
-//   .listen()
-//   .then(({ url }) => {
-//     console.log(`🚀 Server ready at ${url}`);
-//   })
-//   .then(() => {
-//     mongoose.connect(DB_URL, {
-//       useUnifiedTopology: true,
-//       useNewUrlParser: true,
-//     });
-//   })
-//   .then(() => {
-//     console.log(`🚀 Database success connection`);
-//   });
-
-// async function startApolloServer() {
-//   const server = new ApolloServer({
-//     typeDefs,
-//     resolvers,
-//     csrfPrevention: true,
-//     cache: "bounded",
-//   });
-
-//   const app = express();
-//   await server.start();
-//   server.applyMiddleware({ app, path: "/" });
-
-//   app.get("/", (req, res) => {
-//     console.log("Apollo GraphQL Express server is ready");
-//   });
-
-//   app.listen(() => {
-//     console.log(`Server is listening on port ${PORT}${server.graphqlPath}`);
-//   });
-// }
-
-// startApolloServer();
-
 const server = new ApolloServer({
   typeDefs,
   resolvers,
@@ -126,17 +59,9 @@ const server = new ApolloServer({
   cache: "bounded",
 });
 
-// const app = express();
-// // await server.start();
-
-// server.applyMiddleware({ app, path: "/graphql" });
-
-// The `listen` method launches a web server.
-server
-  .listen()
-  .then(({ url }) => {
-    console.log(`🚀  Server ready at ${url}`);
-  })
-  .then(() => {
-    console.log(`🚀 Database success connection`);
-  });
+server.listen().then(({ url }) => {
+  console.log(`🚀  Server ready at ${url}`);
+});
+// .then(() => {
+//   console.log(`🚀 Database success connection`);
+// });

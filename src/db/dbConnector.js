@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import { environment } from "../config/config";
+import { environment } from "../config/config.js";
 import { todoSchema } from "./schema/todoSchema.js";
 const env = process.env.NODE_ENV || "development";
 
