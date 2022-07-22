@@ -8,7 +8,7 @@ export const resolvers = {
     },
     getTodoById: async (_, { id }) => {
       try {
-        const todo = await Todo.findById(id);
+        const todo = await Todo.findById({ _id: id });
         if (!todo) throw new Error("не найден ID");
         return todo;
       } catch (e) {
@@ -19,19 +19,34 @@ export const resolvers = {
   Mutation: {
     addTodo: async (_, { todo }) => {
       try {
-        const newTodo = new Todo({ ...todo, id: v4(), done: false });
+        const newTodo = new Todo({ ...todo, done: false });
         const addedTodo = await newTodo.save();
         return addedTodo;
       } catch (error) {
         return error;
       }
     },
-    removeTodo: (_, { id }) => {
-      return removeTodo(id);
+    removeTodo: async (_, { id }) => {
+      try {
+        const todo = await Todo.findByIdAndDelete({ _id: id });
+        if (!todo) throw new Error("не найден ID");
+        return todo;
+      } catch (e) {
+        return e.message;
+      }
     },
 
-    // updateTodo: (_, { id, todo }) => {
-    //   return updateTodo(id, todo);
-    // }
+    updateTodo: async (_, { id, updateTodo }) => {
+      try {
+        const todo = await Todo.findByIdAndUpdate(id, updateTodo, {
+          new: true,
+        });
+
+        if (!todo) throw new Error("не найден ID");
+        return todo;
+      } catch (e) {
+        return e.message;
+      }
+    },
   },
 };

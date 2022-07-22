@@ -27,6 +27,6 @@ export const typeDefs = gql`
   type Mutation {
     addTodo(todo: TodoInput!): Todo
     removeTodo(id: ID!): Todo
-    updateTodo(id: ID!, book: UpdateTodoInput): Todo
+    updateTodo(id: ID!, updateTodo: UpdateTodoInput): Todo
   }
 `;
